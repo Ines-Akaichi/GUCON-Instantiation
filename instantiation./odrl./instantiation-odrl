@@ -1,0 +1,51 @@
+@prefix cc:      <http://creativecommons.org/ns#> .
+@prefix dct:     <http://purl.org/dc/terms/> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix odrlp:    <http://example.org/odrl:profile:01/> .
+@prefix ex:    <http://example.org/> .
+
+
+
+<http://example.org/policy/policy-use-case> 
+a odrl:Set;
+odrl:profile   <http://example.org/odrl:profile:01/>;
+odrl:permission [
+
+odrl:assignee 
+[
+a  odrl:PartyCollection ;
+odrl:source odrlp:persons;      ##range of source is not defined
+odrl:refinement                                                     
+[
+odrl:and
+[ 
+odrl:leftOperand    odrlp:stayIn   ;                      # properties here related to a Person who is part of persons
+odrl:operator       odrl:eq   ;
+odrl:rightOperand   [
+    a odrlp:Hotel;
+    odrlp:hasManagementUnit odrlp:HotelManagement;
+];
+]                             
+,                  
+
+[ odrl:leftOperand    odrlp:hasStayDuration  ;
+odrl:operator       odrl:eq   ;
+odrl:rightOperand   ex:permanent   ; ] ;            
+                                                     
+]
+
+];
+
+odrl:action odrlp:request;
+
+odrl:target 
+[
+a odrlp:Signature;
+odrlp:hasSignatory odrlp:HotelManagement;        
+]
+
+].
+
+## Things to keep in mind: refined is only applied over Collection(Party or Asset)/ domain: ASSet/PartyCollection + source is always used to refer to the uri of a Collection + permanent is leftout from the profile, because leftOperand is designed like that 
