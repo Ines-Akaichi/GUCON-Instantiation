@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ucpr:    <http://example.org/ucp:profile:01/> .
+@prefix ucp:    <http://example.org/ucp/> .
+@prefix ex:    <http://example.org/> .
+
+
+ex:PermissionRequestSignature rdf:type owl:Class ;
+rdfs:subClassOf  ucp:Permission ;
+owl:equivantClass
+[
+rdf:type    owl:Class;
+owl:intersectionOf  
+(
+[
+rdf:type  owl:Restriction ;
+owl:onProperty   ucp:hasAction ;
+owl:hasValue ucpr:request                
+]
+
+[
+rdf:type owl:Restriction;
+owl:onProperty ucp:hasResource;
+owl:allValuesFrom  [                               
+ 	rdf:type ucpr:Signature ;
+ 	ucpr:signatory  ucpr:HotelManagement
+]
+]
+
+[
+rdf:type owl:Restricton;
+owl:onProperty ucp:hasEntity;
+owl:allValuesFrom  [
+	rdf:type  foaf:Person ;
+	ucpr:stayIn [
+		rdf:type ucpr:Hotel ;
+		ucpr:hasManagementUnit  ucpr:HotelMangement;
+	] ;
+	ucpr:stayDuration ex:permanent ;
+]
+]
+
+)
+
+] .
