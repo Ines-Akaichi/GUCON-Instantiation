@@ -1,0 +1,1077 @@
+@base  <http://www.w3.org/ns/odrl/2/> .
+@prefix : <http://www.w3.org/ns/odrl/2/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+
+<http://example.org/odrl:profile:01/> 
+    a owl:Ontology ;
+    rdfs:label "ODRL Usage Control Profile"@en ;
+    owl:versionInfo "0.1" ;
+    dct:creator "Ines Akaichi";
+    dct:description "."@en ;
+    rdfs:comment "This is the OWL ontology for ODRL Usage Control Profile 0.1."@en ;
+    dct:license <https://www.w3.org/Consortium/Legal/2002/ipr-notice-20021231#Copyright/> .
+
+
+
+## SKOS Collections for Grouping related concepts.
+## These SKOS Collections are primarily used to create the sections of the ODRL Vocabulary document.
+
+##Policy
+
+<http://www.w3.org/ns/odrl/2/#policyConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Policy"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Policy ;
+    skos:member :uid ;
+    skos:member :profile ;
+    skos:member :inheritFrom .
+
+
+<http://www.w3.org/ns/odrl/2/#policySubClasses>
+    a skos:Collection ;
+    skos:prefLabel "Policy Subclasses"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Agreement ;
+    skos:member :Offer ;
+    skos:member :Set .
+
+
+##Rule
+
+<http://www.w3.org/ns/odrl/2/#ruleConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Rule"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Rule ;
+    skos:member :relation ;
+    skos:member :function ;
+    skos:member :failure .
+
+##Conflict
+
+<http://www.w3.org/ns/odrl/2/#conflictConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Policy Conflict Strategy"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :ConflictTerm ;
+    skos:member :conflict ;
+    skos:member :perm ;
+    skos:member :prohibit ;
+    skos:member :invalid .
+
+
+##Asset
+
+<http://www.w3.org/ns/odrl/2/#assetConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Asset"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Asset ;
+    skos:member :AssetCollection .
+
+<http://www.w3.org/ns/odrl/2/#assetRelations>
+    a skos:Collection ;
+    skos:prefLabel "Asset Relations"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :target ;
+    skos:member :hasPolicy .
+
+<http://example.org/odrl:profile:01/#assetProfile>
+    a skos:Collection ;
+    skos:prefLabel "Assets for rules"@en ;
+    skos:scopeNote "Asset Profile"@en ;
+    skos:member :Signature .
+    skos:member :signatory .
+
+
+##Party
+
+<http://www.w3.org/ns/odrl/2/#partyConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Party"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Party ;
+    skos:member :PartyCollection .
+
+<http://www.w3.org/ns/odrl/2/#partyRoles>
+    a skos:Collection ;
+    skos:prefLabel "Party Functions"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :assignee ;
+    skos:member :assigner .
+
+<http://example.org/odrl:profile:01/#partyProfile>
+    a skos:Collection ;
+    skos:prefLabel "parties for rules and other properties"@en ;
+    skos:scopeNote "Party Profile"@en ;
+    skos:member :HotelManagement .
+    skos:member :persons .
+    skos:member :stayIn .
+    skos:member :stayDuration .
+    skos:member :Location .
+    skos:member :Hotel .
+
+
+<http://www.w3.org/ns/odrl/2/#assetParty>
+    a skos:Collection ;
+    skos:prefLabel "Asset and Party"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :partOf ;
+    skos:member :source .
+
+##Actions 
+
+<http://www.w3.org/ns/odrl/2/#actionConcepts>
+    a skos:Collection ;
+    skos:prefLabel "Action"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Action ;
+    skos:member :action ;
+    skos:member :includedIn ;
+    skos:member :implies .
+
+
+<http://www.w3.org/ns/odrl/2/#actions>
+    a skos:Collection ;
+    skos:prefLabel "Actions for Rules"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :use ;
+    skos:member :transfer .
+
+<http://example.org/odrl:profile:01/#actionProfile>
+    a skos:Collection ;
+    skos:prefLabel "Actions for Rules"@en ;
+    skos:scopeNote "Action Profile"@en ;
+    skos:member :request.  
+
+##Permissions, prohibitions and duties
+
+<http://www.w3.org/ns/odrl/2/#permissions>
+    a skos:Collection ;
+    skos:prefLabel "Permission"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Permission ;
+    skos:member :permission .
+
+<http://www.w3.org/ns/odrl/2/#prohibitions>
+    a skos:Collection ;
+    skos:prefLabel "Prohibition"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Prohibition ;
+    skos:member :prohibition .
+
+
+<http://www.w3.org/ns/odrl/2/#duties>
+    a skos:Collection ;
+    skos:prefLabel "Duty"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Duty ;
+    skos:member :obligation ;
+    skos:member :duty ;
+    skos:member :consequence ;
+    skos:member :remedy .
+
+##Constraint
+
+<http://www.w3.org/ns/odrl/2/#constraints>
+    a skos:Collection ;
+    skos:prefLabel "Constraint"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :Constraint ;
+    skos:member :constraint ;
+    skos:member :refinement ;
+    skos:member :Operator ;
+    skos:member :operator ;
+    skos:member :RightOperand ;
+    skos:member :rightOperand ;
+    skos:member :rightOperandReference ;
+    skos:member :LeftOperand ;
+    skos:member :leftOperand ;
+    skos:member :unit ;
+    skos:member :dataType ;
+    skos:member :status .
+
+
+<http://www.w3.org/ns/odrl/2/#logicalConstraints>
+    a skos:Collection ;
+    skos:prefLabel "Logical Constraint"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :LogicalConstraint ;
+    skos:member :operand .
+
+
+<http://example.org/odrl:profile:01/#constraintLeftOperandProfile>
+    a skos:Collection ;
+    skos:prefLabel "Constraint Left Operands"@en ;
+    skos:scopeNote "Left Operand Profile"@en ;
+    skos:member :stayIn .
+    skos:member :stayDuration .
+
+
+<http://www.w3.org/ns/odrl/2/#constraintLogicalOperands>
+    a skos:Collection ;
+    skos:prefLabel "Logical Constraint Operands"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :or ;
+    skos:member :xone ;
+    skos:member :and ;
+    skos:member :andSequence .
+
+<http://www.w3.org/ns/odrl/2/#constraintRelationalOperators>
+    a skos:Collection ;
+    skos:prefLabel "Constraint Operators"@en ;
+    skos:scopeNote "ODRL Core Vocabulary Terms"@en ;
+    skos:member :eq ;
+    skos:member :gt ;
+    skos:member :gteq ;
+    skos:member :lt ;
+    skos:member :lteq ;
+    skos:member :neq ;
+    skos:member :isA ;
+    skos:member :hasPart ;
+    skos:member :isPartOf ;
+    skos:member :isAllOf ;
+    skos:member :isAnyOf ;
+    skos:member :isNoneOf .
+
+
+## ODRL Core Profile
+
+:core
+    a owl:Thing , skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "ODRL Core Profile"@en ;
+    skos:definition "Identifier for the ODRL Core Profile"@en .
+
+## Assets
+
+:AssetCollection
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Asset ;
+    rdfs:label "Asset Collection"@en ;
+    skos:definition "An Asset that is collection of individual resources"@en .
+
+:partOf
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Part Of"@en ;
+    skos:definition "Identifies an Asset/PartyCollection that the Asset/Party is a member of."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Asset :Party ) ;
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( :AssetCollection :PartyCollection ) ;
+    ] .
+
+## Parties
+
+:Party
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Party"@en ;
+    skos:definition "An entity or a collection of entities that undertake Roles in a Rule."@en ;
+    rdfs:subClassOf [
+        a owl:Class ;
+        owl:unionOf ( schema:Person schema:Organization foaf:Person foaf:Organization foaf:Agent vcard:Individual vcard:Organization vcard:Agent ) ;
+    ];
+    skos:note "The Party entity could be a person, group of people, organisation, or agent. An agent is a person or thing that takes an active role or produces a specified effect. To describe more details about the Party, it is recommended to use W3C vCard Ontology [[vcard-rdf]] or FOAF Vocabulary [[foaf]]."@en .
+
+
+:PartyCollection
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Party ;
+    rdfs:label "Party Collection"@en ;
+    skos:definition "A Party that is a group of individual entities"@en .
+
+## Policies
+
+:Policy
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Policy"@en ;
+    skos:definition "A non-empty group of Permissions and/or Prohibitions."@en ;
+    skos:note "A Policy may contain multiple Rules."@en .
+
+:hasPolicy
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Target Policy"@en ;
+    skos:definition "Identifies an ODRL Policy for which the identified Asset is the target Asset to all the Rules."@en ;
+    skos:note "The Asset being identified MUST be inferred to be the target Asset of all of the Rules of the Policy."@en ;
+    rdfs:domain :Asset ;
+    rdfs:range :Policy .
+
+:uid
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Unique Identifier"@en ;
+    skos:definition "An unambiguous identifier"@en ;
+    skos:note "Used by the Policy, Rule, Asset, Party, Constraint, and Logical Constraint Classes."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Policy :Asset :Rule :Party :Constraint :LogicalConstraint ) ;
+    ] .
+
+:source
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Source"@en ;
+    skos:definition "Reference to a Asset/PartyCollection"@en ;
+    skos:note "Used by AssetCollection and PartyCollection when constraints are applied."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :AssetCollection :PartyCollection ) ;
+    ] .
+
+:ConflictTerm
+    a rdfs:Class, owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Used to establish strategies to resolve conflicts that arise from the merging of Policies or conflicts between Permissions and Prohibitions in the same Policy."@en ;
+    skos:note "Instances of ConflictTerm describe strategies for resolving conflicts."@en ;
+    rdfs:label "Conflict Strategy Preference"@en .
+
+:perm
+    a :ConflictTerm, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Prefer Permissions"@en ;
+    skos:definition "Permissions take preference over prohibitions."@en ;
+    skos:note "Used to determine policy conflict outcomes."@en .
+
+:prohibit
+    a :ConflictTerm, owl:NamedIndividual, skos:Concept;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Prefer Prohibitions"@en ;
+    skos:definition "Prohibitions take preference over permissions."@en ;
+    skos:note "Used to determine policy conflict outcomes."@en .
+
+:UndefinedTerm
+    a rdfs:Class, owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Is used to indicate how to support Actions that are not part of any vocabulary or profile in the policy expression system."@en ;
+    skos:note "Instances of UndefinedTerm describe strategies for processing unsupported actions."@en ;
+    rdfs:label "Undefined Term"@en ;
+    owl:deprecated true .
+
+:ignore
+    a :UndefinedTerm, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Ignore Undefined Actions"@en ;
+    skos:definition "The Action is to be ignored and is not part of the policy – and the policy remains valid."@en ;
+    skos:note "Used to support actions not known to the policy system."@en ;
+    owl:deprecated true .
+
+:invalid
+    a :ConflictTerm, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Void Policy"@en ;
+    skos:definition "The policy is void."@en ;
+    skos:note "Used to indicate the policy is void for Conflict Strategy."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+:support
+    a :UndefinedTerm, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Support Undefined Actions"@en ;
+    skos:definition "The Action is to be supported as part of the policy – and the policy remains valid."@en ;
+    skos:note "Used to support actions not known to the policy system."@en ;
+    owl:deprecated true .
+
+:conflict
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Handle Policy Conflicts"@en ;
+    skos:definition "The conflict-resolution strategy for a Policy."@en ;
+    skos:note "If no strategy is specified, the default is invalid."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :ConflictTerm .
+
+:undefined
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Handle Undefined Term"@en ;
+    skos:definition "Relates the strategy used for handling undefined actions to a Policy."@en ;
+    skos:note "If no strategy is specified, the default is invalid."@en ;
+    rdfs:range :UndefinedTerm ;
+    owl:deprecated true .
+
+:permission
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Permission"@en ;
+    skos:definition "Relates an individual Permission to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Permission .
+
+:prohibition
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Prohibition"@en ;
+    skos:definition "Relates an individual Prohibition to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Prohibition.
+
+:inheritAllowed
+    a rdf:Property , owl:DatatypeProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Inheritance Allowed"@en ;
+    skos:definition "Indicates if the Policy entity can be inherited."@en ;
+    skos:note "A boolean value."@en ;
+#   rdfs:domain :Policy ;
+#   rdfs:range xsd:boolean .
+    owl:deprecated true .
+
+:inheritFrom
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Inherits From"@en ;
+    skos:definition "Relates a (child) policy to another (parent) policy from which terms are inherited."@en ;
+    skos:note "The child policy will inherit Rules from the parent policy"@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Policy .
+
+:inheritRelation
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Inherit Relation"@en ;
+    skos:definition "Indentifies the type of inheritance."@en ;
+    skos:note "For example, this may indicate the business scenario, such as subscription, or prior arrangements between the parties (that are not machine representable)."@en ;
+#   rdfs:domain :Policy ;
+#   rdfs:range rdfs:Resource ;
+    owl:deprecated true .
+
+
+:profile
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Profile"@en ;
+    skos:definition "The identifier(s) of an ODRL Profile that the Policy conforms to."@en ;
+    skos:note "The profile property is mandatory if the Policy is using an ODRL Profile."@en ;
+    rdfs:domain :Policy .
+#   rdfs:range rdfs:Resource .
+
+## Permissions, prohibitions and duties
+
+:Rule
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Rule"@en ;
+    skos:definition "An abstract concept that represents the common characteristics of Permissions, Prohibitions, and Duties."@en ;
+    skos:note "Rule is an abstract concept."@en .
+
+:Permission
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Prohibition, :Duty ;
+    rdfs:label "Permission"@en ;
+    skos:definition "The ability to perform an Action over an Asset."@en .
+
+:Prohibition
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Duty, :Permission ;
+    rdfs:label "Prohibition"@en ;
+    skos:definition "The inability to perform an Action over an Asset."@en .
+
+:Duty
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Prohibition, :Permission ;
+    rdfs:label "Duty"@en ;
+    skos:definition "The obligation to perform an Action"@en .
+
+:Action
+    a rdfs:Class, owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "An operation on an Asset."@en ;
+    skos:note "Actions may be allowed by Permissions, disallowed by Prohibitions, or made mandatory by Duties."@en ;
+    rdfs:subClassOf schema:Action ;
+    rdfs:label "Action"@en .
+
+:includedIn
+    a rdf:Property, owl:ObjectProperty, owl:TransitiveProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Included In"@en ;
+    skos:definition "An Action transitively asserts that another Action that encompasses its operational semantics."@en ;
+    skos:note "The purpose is to explicitly assert that the semantics of the referenced instance of an other Action encompasses (includes) the semantics of this instance of Action. The includedIn property is transitive, and as such, the Actions form ancestor relationships."@en ;
+    rdfs:domain :Action ;
+    rdfs:range :Action  .
+
+:implies
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Implies"@en ;
+    skos:definition "An Action asserts that another Action is not prohibited to enable its operational semantics."@en ;
+    skos:note "The property asserts that an instance of Action entails that the other instance of Action is not prohibited."@en ;
+    rdfs:domain :Action ;
+    rdfs:range :Action  .
+
+
+:Constraint
+    a rdfs:Class, owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Constraint"@en ;
+    skos:definition "A boolean expression that refines the semantics of an Action and Party/Asset Collection or declare the conditions applicable to a Rule."@en .
+
+:LogicalConstraint
+    a rdfs:Class, owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Logical Constraint"@en ;
+    skos:definition "A logical expression that refines the semantics of an Action and Party/Asset Collection or declare the conditions applicable to a Rule."@en .
+
+
+:relation
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Relation"@en ;
+    skos:definition "Relation is an abstract property which creates an explicit link between an Action and an Asset."@en ;
+    skos:note "Sub-properties of relation are used to define the nature of that link."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Asset .
+
+
+:target
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :relation ;
+    rdfs:label "Target"@en ;
+    skos:definition "The target property indicates the Asset that is the primary subject to which the Rule action directly applies."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Asset .
+
+:function
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Function"@en ;
+    skos:definition "Function is an abstract property whose sub-properties define the functional roles which may be fulfilled by a party in relation to a Rule."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Party .
+
+:scope
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Scope"@en ;
+    skos:definition "The identifier of a scope that provides context to the extent of the entity."@en ;
+    skos:note "Used to define scopes for Assets and Parties."@en ;
+    owl:deprecated true .
+
+:action
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Action"@en ;
+    skos:definition "The operation relating to the Asset for which the Rule is being subjected."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Action .
+
+:constraint
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Constraint"@en ;
+    skos:definition "Constraint applied to a Rule"@en ;
+    skos:note "Constraints on Rules are used to determine if a rule is Active or not. Example: the Permission rule is only active during the year 2018."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Policy :Rule ) ;
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( :Constraint :LogicalConstraint ) ;
+    ] .
+
+:refinement
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Refinement"@en ;
+    skos:definition "Constraint used to refine the semantics of an Action, or Party/Asset Collection"@en ;
+    skos:note "Example: the Action print is only permitted on 50% of the asset."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Action :AssetCollection :PartyCollection ) ;
+    ] ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( :Constraint :LogicalConstraint ) ;
+    ] .
+
+:duty
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Duty"@en ;
+    skos:definition "Relates an individual Duty to a Permission."@en ;
+    skos:note "A Duty is a pre-condition which must be fulfilled in order to receive the Permission."@en ;
+    rdfs:domain :Permission ;
+    rdfs:range :Duty .
+
+:obligation
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Obligation"@en ;
+    skos:definition "Relates an individual Duty to a Policy."@en ;
+    skos:note "The Duty is a requirement which must be fulfilled."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Duty .
+
+:failure
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Failure"@en ;
+    skos:definition "Failure is an abstract property that defines the violation (or unmet) relationship between Rules."@en ;
+    skos:note "The parent property to sub-properties that express explicit failure contexts."@en ;
+    rdfs:domain :Rule ;
+    rdfs:range :Rule .
+
+:consequence
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :failure ;
+    rdfs:label "Consequence"@en ;
+    skos:definition "Relates a Duty to another Duty, the latter being a consequence of not fulfilling the former."@en ;
+    skos:note "The consequence property is utilised to express the repercussions of not fulfilling an agreed Policy obligation or duty for a Permission. If either of these fails to be fulfilled, then this will result in the consequence Duty also becoming a new requirement, meaning that the original obligation or duty, as well as the consequence Duty must all be fulfilled"@en ;
+    rdfs:domain :Duty ;
+    rdfs:range :Duty .
+
+:remedy
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :failure ;
+    rdfs:label "Remedy"@en ;
+    skos:definition "Relates an individual remedy Duty to a Prohibition."@en ;
+    skos:note "The remedy property expresses an agreed Duty that must be fulfilled in case that a Prohibition has been violated by being exercised."@en ;
+    rdfs:domain :Prohibition ;
+    rdfs:range :Duty .
+
+:unit
+    a rdf:Property ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:domain :Constraint ;
+    rdfs:label "Unit"@en ;
+    skos:definition "The unit of measurement of the value of the rightOperand or rightOperandReference of a Constraint."@en .
+
+:dataType
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:domain :Constraint ;
+    rdfs:range rdfs:Datatype ;
+    rdfs:label "Datatype"@en ;
+    skos:definition "The datatype of the value of the rightOperand or rightOperandReference of a Constraint."@en ;
+    skos:note "In RDF encodings, use of the rdf:datatype MUST be used. In JSON-LD encoding, the use of @type MUST be used."@en .
+
+:operator
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Operator"@en ;
+    skos:definition "The operator function applied to operands of a Constraint"@en ;
+    rdfs:domain :Constraint ;
+    rdfs:range :Operator .
+
+:rightOperand
+    a rdf:Property, owl:DatatypeProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Right Operand"@en ;
+    skos:definition "The value of the right operand in a constraint expression."@en ;
+    skos:note "When used with set-based operators, a list of values may be used."@en ;
+    rdfs:range [
+        a owl:Class ;
+        owl:unionOf ( :RightOperand rdfs:Literal xsd:anyURI ) ;
+    ] ;
+    rdfs:domain :Constraint .
+
+:rightOperandReference
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Right Operand Reference"@en ;
+    skos:definition "A reference to a web resource providing the value for the right operand of a Constraint."@en ;
+    skos:note "An IRI that MUST be dereferenced to obtain the actual right operand value. When used with set-based operators, a list of IRIs may be used"@en ;
+    rdfs:domain :Constraint .
+
+:leftOperand
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Has Left Operand"@en ;
+    skos:definition "The left operand in a constraint expression."@en ;
+    rdfs:range :LeftOperand ;
+    rdfs:domain :Constraint .
+
+:status
+    a rdf:Property, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Status"@en ;
+    skos:definition "the value generated from the leftOperand action or a value related to the leftOperand set as the reference for the comparison."@en ;
+    rdfs:domain :Constraint .
+
+:operand
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Operand"@en ;
+    skos:definition "Operand is an abstract property for a logical relationship."@en ;
+    skos:note "Sub-properties of operand are used for Logical Constraints."@en ;
+    rdfs:domain :LogicalConstraint .
+
+## Operators
+
+:Operator
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Operator"@en ;
+    skos:definition "Operator for constraint expression."@en ;
+    skos:note "Instances of the Operator class representing relational operators."@en .
+
+:eq
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Equal to"@en ;
+    skos:definition "Indicating that a given value equals the right operand of the Constraint."@en .
+
+:gt
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Indicating that a given value is greater than the right operand of the Constraint."@en ;
+    rdfs:label "Greater than"@en .
+
+:gteq
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Indicating that a given value is greater than or equal to the right operand of the Constraint."@en ;
+    rdfs:label "Greater than or equal to"@en .
+
+:hasPart
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value contains the right operand of the Constraint."@en ;
+    rdfs:label "Has part"@en .
+
+:isA
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value is an instance of the right operand of the Constraint."@en ;
+    rdfs:label "Is a"@en .
+
+:isAllOf
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value is all of the right operand of the Constraint."@en ;
+    rdfs:label "Is all of"@en  .
+
+:isAnyOf
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value is any of the right operand of the Constraint."@en ;
+    rdfs:label "Is any of"@en .
+
+:isNoneOf
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value is none of the right operand of the Constraint."@en ;
+    rdfs:label "Is none of"@en .
+
+:isPartOf
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "A set-based operator indicating that a given value is contained by the right operand of the Constraint."@en ;
+    rdfs:label "Is part of"@en .
+
+:lt
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Indicating that a given value is less than the right operand of the Constraint."@en ;
+    rdfs:label "Less than"@en .
+
+:lteq
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Indicating that a given value is less than or equal to the right operand of the Constraint."@en ;
+    rdfs:label "Less than or equal to"@en .
+
+:neq
+    a :Operator, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    skos:definition "Indicating that a given value is not equal to the right operand of the Constraint."@en ;
+    rdfs:label "Not equal to"@en .
+
+:andSequence
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :operand ;
+    rdfs:label "And Sequence"@en ;
+    skos:definition "The relation is satisfied when each of the Constraints are satisfied in the order specified."@en ;
+    skos:note "This property MUST only be used for Logical Constraints, and the list of operand values MUST be Constraint instances. The order of the list MUST be preserved. The andSequence operator is an example where there may be temporal conditional requirements between the operands. This may lead to situations where the outcome is unresolvable, such as deadlock if one of the Constraints is unable to be satisfied. ODRL Processing systems SHOULD plan for these scenarios and implement mechanisms to resolve them."@en .
+
+:or
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :operand ;
+    skos:definition "The relation is satisfied when at least one of the Constraints is satisfied."@en ;
+    rdfs:label "Or"@en ;
+    skos:note "This property MUST only be used for Logical Constraints, and the list of operand values MUST be Constraint instances."@en .
+
+:and
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :operand ;
+    skos:definition "The relation is satisfied when all of the Constraints are satisfied."@en ;
+    skos:note "This property MUST only be used for Logical Constraints, and the list of operand values MUST be Constraint instances."@en ;
+    rdfs:label "And"@en .
+
+:xone
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :operand ;
+    skos:definition "The relation is satisfied when only one, and not more, of the Constaints is satisfied"@en ;
+    rdfs:label "Only One"@en ;
+    skos:note "This property MUST only be used for Logical Constraints, and the list of operand values MUST be Constraint instances."@en .
+
+
+
+## LeftOperand
+
+:LeftOperand
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Left Operand"@en ;
+    skos:definition "Left operand for a constraint expression."@en ;
+    skos:note "Instances of the LeftOperand class are used as the leftOperand of a Constraint."@en .
+
+## LeftOperand Profile 
+
+<http://example.org/odrl:profile:01/#stayIn>
+    a :LeftOperand, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "stayIn"@en ;
+    skos:definition "the act of a staying in a specific locatio like a hotel"@en ;
+    skos:note "Example: a person stays in a hotel."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+<http://example.org/odrl:profile:01/#stayDuration>
+    a :LeftOperand, owl:NamedIndividual, skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "hasStayDuration"@en ;
+    skos:definition "the stay duration of a person in a a specific location"@en ;
+    skos:note "Example: the stay duration of a person in a hotel is permanent."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+## RightOperand
+
+:RightOperand
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Right Operand"@en ;
+    skos:definition "Right operand for constraint expression."@en ;
+    skos:note "Instances of the RightOperand class are used as the rightOperand of a Constraint."@en .
+
+
+## Actions
+
+:use
+    a :Action, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Use"@en ;
+    skos:definition "To use the Asset"@en ;
+    skos:note "Use is the most generic action for all non-third-party usage. More specific types of the use action can be expressed by more targetted actions."@en .
+
+:transfer
+    a :Action, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Transfer Ownership"@en ;
+    skos:definition "To transfer the ownership of the Asset in perpetuity."@en .
+
+
+## Actions Profile
+
+<http://example.org/odrl:profile:01/#request>
+    a :Action, skos:Concept ;
+    :includedIn odrl:use ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "request"@en ;
+    skos:definition "To request something from someone."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+
+## Assets Profile
+
+<http://example.org/odrl:profile:01/#Signature>
+    a rdfs:Class , owl:Class, skos:Concept;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/>; 
+    rdfs:label "Signature"@en ;
+    skos:definition "Signature of a person"@en .
+
+:Asset
+    a rdfs:Class , owl:Class, skos:Concept;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:label "Asset"@en ;
+    rdfs:subClassOf <http://example.org/odrl:profile:01/#Signature> ;
+    skos:definition "A resource or a collection of resources that are the subject of a Rule."@en ;
+    skos:note "The Asset entity can be any form of identifiable resource, such as data/information, content/media, applications, or services. Furthermore, it can be used to represent other Asset entities that are needed to undertake the Policy expression, such as with the Duty entity. To describe more details about the Asset, it is recommended to use Dublin Core [[dcterms]] elements or other content metadata."@en .
+
+ <http://example.org/odrl:profile:01/#signatory>
+    a rdf:Property , owl:ObjectProperty, skos:Concept  ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "signatory"@en ;
+    skos:definition "the person who signs."@en ;
+    rdfs:domain :Signature ;
+    rdfs:range :Party.
+
+
+   
+## Party Profile
+
+<http://example.org/odrl:profile:01/#persons>
+    a :PartyCollection ,  skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "persons"@en ;
+    skos:definition "a collection of persons."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+foaf:Person
+    :partOf :PartyCollection .
+
+<http://example.org/odrl:profile:01/#stayIn> 
+    a rdf:Property , owl:ObjectProperty, skos:Concept;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "stayIn "@en ;
+    skos:definition "."@en ;
+    rdfs:domain foaf:Person ;
+    rdfs:range :Location .
+
+<http://example.org/odrl:profile:01/#Location>
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "Location"@en ;
+    rdfs:subClassOf <http://example.org/odrl:profile:01/#Hotel> .
+    skos:definition "."@en .
+
+<http://example.org/odrl:profile:01/#Hotel> 
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:label "Hotel"@en .
+
+<http://example.org/odrl:profile:01/#stayDuration>
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "hasStayDuration"@en ;
+    skos:definition "."@en ;
+    rdfs:domain foaf:Person .
+
+<http://example.org/odrl:profile:01/#HotelManagement>
+    a rdfs:Class , owl:Class, skos:Concept;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "HotelManagement"@en ;
+    skos:definition "The hotel management responsible for legal tasks such as giving signature, etc."@en ;
+    skos:scopeNote "Non-Normative"@en .
+
+foaf:Organization
+    rdfs:subClassOf <http://example.org/odrl:profile:01/#HotelManagement> .
+
+    <http://example.org/odrl:profile:01/#managementUnit>
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "hasManagementunit"@en ;
+    skos:definition "."@en ;
+    rdfs:domain <http://example.org/odrl:profile:01/#Hotel> ;
+    rdfs:range <http://example.org/odrl:profile:01/#HotelManagement> .
+
+
+## Functions
+
+:assignee
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :function ;
+    rdfs:label "Assignee"@en ;
+    skos:definition "The Party is the recipient of the Rule."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Party .
+
+:assigner
+    a rdf:Property , owl:ObjectProperty, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subPropertyOf :function ;
+    rdfs:label "Assigner"@en ;
+    skos:definition "The Party is the issuer of the Rule."@en ;
+    rdfs:domain [
+        a owl:Class ;
+        owl:unionOf ( :Rule :Policy ) ;
+    ] ;
+    rdfs:range :Party .
+
+
+## Policies
+
+:Agreement
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Policy ;
+    owl:disjointWith :Offer ;
+    rdfs:label "Agreement"@en ;
+    skos:definition "A Policy that grants the assignee a Rule over an Asset from an assigner."@en ;
+    skos:note "An Agreement Policy MUST contain at least one Permission or Prohibition rule, a Party with Assigner function, and a Party with Assignee function (in the same Permission or Prohibition). The Agreement Policy will grant the terms of the Policy from the Assigner to the Assignee."@en .
+
+:Offer
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Policy ;
+    owl:disjointWith :Agreement ;
+    rdfs:label "Offer"@en ;
+    skos:definition "A Policy that proposes a Rule over an Asset from an assigner."@en ;
+    skos:note "An Offer Policy MUST contain at least one Permission or Prohibition rule and a Party with Assigner function (in the same Permission or Prohibition). The Offer Policy MAY contain a Party with Assignee function, but MUST not grant any privileges to that Party."@en .
+
+:Set
+    a rdfs:Class , owl:Class, skos:Concept ;
+    rdfs:isDefinedBy odrl: ;
+    rdfs:subClassOf :Policy ;
+    owl:disjointWith :Agreement, :Offer;
+    rdfs:label "Set"@en ;
+    skos:definition "A Policy that expresses a Rule over an Asset."@en ;
+    skos:note "A Set Policy MUST contain a target Asset, and at least one Rule. A Set Policy is the default Policy subclass. The Set is aimed at scenarios where there is an open criteria for the semantics of the policy expressions and typically refined by other systems/profiles that process the information at a later time. No privileges are granted to any Party (if defined)."@en .
+
+
+## Declaration of annotation properties to keep the ontology within OWL DL
+    skos:broader rdf:type owl:AnnotationProperty .
+    skos:member rdf:type owl:AnnotationProperty .
+    skos:note rdf:type owl:AnnotationProperty .
+    skos:scopeNote rdf:type owl:AnnotationProperty .
+    skos:prefLabel rdf:type owl:AnnotationProperty .
+    skos:definition rdf:type owl:AnnotationProperty .
+    skos:broaderTransitive rdf:type owl:AnnotationProperty .
+    skos:hasTopConcept rdf:type owl:AnnotationProperty .
+    dct:contributor rdf:type owl:AnnotationProperty .
+    dct:license rdf:type owl:AnnotationProperty .
+    dct:issued rdf:type owl:AnnotationProperty .
+    dct:subject rdf:type owl:AnnotationProperty .
+    dct:creator rdf:type owl:AnnotationProperty .
+    dct:description rdf:type owl:AnnotationProperty .
+    dct:isVersionOf rdf:type owl:AnnotationProperty .
+    dct:format rdf:type owl:AnnotationProperty .
+    skos:Collection a owl:Class .
+    skos:Concept a owl:Class .
+    skos:ConceptScheme a owl:Class .
