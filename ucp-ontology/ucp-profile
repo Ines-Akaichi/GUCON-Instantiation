@@ -1,0 +1,225 @@
+@base <http://example.org/ucp/>  .
+@prefix : <http://example.org/ucp/>   .
+@prefix ucp:  <http://example.org/ucp/>  .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+
+<http://example.org/ucp:profile:01/> 
+    a owl:Ontology ;
+    rdfs:label ""@en ;
+    owl:versionInfo "0.1" ;
+    dct:creator "Ines Akaichi";
+    dct:description "."@en ;
+    rdfs:comment "This is the OWL ontology for ."@en ;
+    dct:license <https://www.w3.org/Consortium/Legal/2002/ipr-notice-20021231#Copyright/> .
+
+## Policies and Rules
+
+:Policy
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "Policy"@en ;
+    skos:definition "A non-empty group of Permissions and/or Prohibitions and/or Obligations and/or Dispensations."@en ;
+    skos:note "A Policy may contain multiple Rules."@en .
+
+:Rule
+    a rdfs:Class , owl:Class;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "Rule"@en ;
+    skos:definition "An abstract concept that represents the common characteristics of Permissions, Prohibitions, and Duties."@en ;
+    skos:note "Rule is an abstract concept."@en .
+
+:permission
+    a rdf:Property , owl:ObjectProperty;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasPermission"@en ;
+    skos:definition "Relates an individual Permission to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Permission .
+
+:prohibition
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasProhibition"@en ;
+    skos:definition "Relates an individual Prohibition to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Prohibition.
+
+:obligation
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasObligation"@en ;
+    skos:definition "Relates an individual Obligation to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Obligation.
+
+
+:dispensation
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasDispensation"@en ;
+    skos:definition "Relates an individual Dispensation to a Policy."@en ;
+    rdfs:domain :Policy ;
+    rdfs:range :Dispensation.
+
+
+:Permission
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Prohibition, :Obligation, :Dispensation ;
+    rdfs:label "Permission"@en ;
+    skos:definition "The ability to perform an Action over an Resource."@en .
+
+:Prohibition
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Obligation, :Permission, :Dispensation;
+    rdfs:label "Prohibition"@en ;
+    skos:definition "The inability to perform an Action over an Resource."@en .
+
+:Obligation
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Prohibition, :Permission, :Dispensation ;
+    rdfs:label "Obligation"@en ;
+    skos:definition "The obligation to perform an Action"@en .
+
+:Dispensation
+    a rdfs:Class , owl:Class;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:subClassOf :Rule ;
+    owl:disjointWith :Prohibition, :Permission, :Obligation ;
+    rdfs:label "Dispensation"@en ;
+    skos:definition "The dispensation from performing an Action"@en .
+
+
+## Resources
+
+:resource
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasResource"@en ;
+    skos:definition "The target property indicates the resource that is the primary subject to which the Rule action directly applies."@en ;
+    rdfs:domain :Rule ;
+    rdfs:range <http://example.org/ucp:profile:01/#Resource>  .
+
+## Resource Profile
+
+<http://example.org/ucp:profile:01/#Resource> 
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy  <http://example.org/ucp:profile:01/> ;
+    rdfs:label "Resource"@en ;
+    skos:definition "A resource or a collection of resources that are the subject of a Rule."@en .
+
+<http://example.org/ucp:profile:01/#Signature> 
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/> ;
+    rdfs:label "Signature"@en ;
+    rdfs:subClassOf <http://example.org/ucp:profile:01/#Resource>  ;
+    skos:definition "."@en .
+
+<http://example.org/ucp:profile:01/#signatory>
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/> ;
+    rdfs:label "hasSignatory"@en ;
+    rdfs:domain <http://example.org/ucp:profile:01/#Signature> ;
+    rdfs:range <http://example.org/ucp:profile:01/#Entity> .
+
+## Entities
+
+:entity
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasEntity"@en ;
+    skos:definition "entity is  property which defines the  roles which may be fulfilled by an Entity in relation to a Rule."@en ;
+    rdfs:domain :Rule  ;
+    rdfs:range <http://example.org/ucp:profile:01/#Entity> .
+
+
+## Entities Profile                  ##Take care of IRIs
+
+<http://example.org/ucp:profile:01/#Entity>
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy  <http://example.org/ucp:profile:01/>  ;
+    rdfs:label "Entity"@en ;
+    skos:definition "An entity or a collection of entities that undertake Roles in a Rule."@en .
+
+foaf:Person 
+rdfs:subClassOf  <http://example.org/ucp:profile:01/#Entity>. 
+
+<http://example.org/ucp:profile:01/#stayIn>
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/>  ;
+    rdfs:label "stayIn"@en ;
+    skos:definition "."@en ;
+    rdfs:domain foaf:Person ;
+    rdfs:range <http://example.org/ucp:profile:01/#Location> .
+
+<http://example.org/ucp:profile:01/#Location>
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/> ;
+    rdfs:label "Location"@en ;
+    skos:definition "."@en .
+
+<http://example.org/ucp:profile:01/#Hotel>
+    a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/> ;
+    rdfs:label "Hotel"@en ;
+     rdfs:subClassOf <http://example.org/ucp:profile:01/#Location> ;
+    skos:definition "."@en .
+
+<http://example.org/ucp:profile:01/#managementUnit>
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/>  ;
+    rdfs:label "hasManagementunit"@en ;
+    skos:definition "."@en ;
+    rdfs:domain <http://example.org/ucp:profile:01/#Hotel> ;
+    rdfs:range <http://example.org/ucp:profile:01/#HotelManagement> .
+
+<http://example.org/ucp:profile:01/#HotelManagement>
+     a rdfs:Class , owl:Class ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/>  ;
+    rdfs:label "HotelManagement"@en ;
+    rdfs:subClassOf <http://example.org/ucp:profile:01/#Entity>;
+    skos:definition "."@en .
+
+<http://example.org/ucp:profile:01/#stayDuration>
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy <http://example.org/ucp:profile:01/>  ;
+    rdfs:label "hasStayDuration"@en ;
+    skos:definition "."@en ;
+    rdfs:domain foaf:Person .
+
+## Actions
+
+:Action
+    a rdfs:Class, owl:Class ;
+    rdfs:isDefinedBy ucp: ;
+    skos:definition "An operation on a Resource."@en ;
+    skos:note "Actions may be allowed by Permissions, disallowed by Prohibitions, made mandatory by Obligations, or exempt by Dispensations."@en ;
+    rdfs:label "Action"@en .
+
+:action
+    a rdf:Property , owl:ObjectProperty ;
+    rdfs:isDefinedBy ucp: ;
+    rdfs:label "hasAction"@en ;
+    skos:definition "The operation relating to the Resource for which the Rule is being subjected."@en ;
+    rdfs:domain :Rule  ;
+    rdfs:range :Action .
+
+
+<http://example.org/ucp:profile:01/#request> 
+    rdf:type owl:NamedIndividual ,  ucp:Action ;
+     rdfs:label "request"@en .
