@@ -1,0 +1,14 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ucpr:    <http://example.org/ucp:profile:01/> .
+@prefix ucp:    <http://example.org/ucp/> .
+@prefix ex:    <http://example.org/> .
+@prefix :    <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix sh:   	<http://www.w3.org/ns/shacl/>.
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema/> .
+
+
+(?x, rdf:type, foaf:Person) AND (?x, ucpr:stayIn, ?l)  AND (?x, ucpr:hasStayDuration, ex:permanent) AND  (?l, rdf:type , ucpr:Hotel)  AND (?l, ucpr:hasManagementUnit, ?m) AND  (?m, rdf:type, ucpr:HotelManagement) AND (?y, ucpr:haSsignatory , ?m) AND (?y, rdf:type , :ucpr:Signature) -> A (?x, ucpr:request, ?y)
+
+
