@@ -1,0 +1,38 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ucpr:    <http://example.org/ucp:profile:01/> .
+@prefix ucp:    <http://example.org/ucp/> .
+@prefix ex:    <http://example.org/> .
+@prefix :    <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix sh:   	<http://www.w3.org/ns/shacl/>.
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema/> .
+
+
+ex:PermissionRequestSignature
+	a sh:NodeShape ;
+	sh:rule [
+		a sh:SPARQLRule ;
+		sh:prefixes ex: , rdf: , ucp: , :ucpr;            ###This needs to be changed following the sh:prefixes and declare, etc.!
+		sh:construct """
+			CONSTRUCT {
+				$this rdf:type ucp:Permission .
+			}
+			WHERE {
+				$this ucp:hasAction ?x .
+				?x rdf:type  ucp:Action .    
+				?x rdfs:label "request"@en .
+				$this  ucp:hasEntity ?y .
+				?y rdf:type  foaf:Person .    
+				?y ucpr:stayIn ?l.
+				?y ucpr:hasStayDuration ex:permanent.
+				?l rdf:type ucpr:Hotel .
+				?l ucpr:hasMangemetUnit ?m .
+				?m rdf:type   ucpr:HotelManagement .
+				$this ucp:hasResource ?z .
+				?z rdf:type  ex:Signature .
+				?z ucpr:hasSignatory ?m .
+			}
+			""" ;
+		
+	] .
