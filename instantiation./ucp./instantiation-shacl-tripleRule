@@ -1,0 +1,91 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ucpr:    <http://example.org/ucp:profile:01/> .
+@prefix ucp:    <http://example.org/ucp/> .
+@prefix ex:    <http://example.org/> .
+@prefix :    <http://example.org/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix sh:   	<http://www.w3.org/ns/shacl/>.
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema/> .
+
+
+## note: check figure attached (https://www.w3.org/TR/2016/WD-shacl-20160814/): how to use filter focus nodes?
+
+ex:PermissionRequestSignature
+	a sh:NodeShape;
+	sh:rule 
+	[
+	a sh:TripleRule;
+	sh:subject sh:this ;
+	sh:predicate  rdf:type;
+	sh:object ucp:Permission  ;
+
+	sh:condition [
+		sh:property [
+			sh:path ucp:hasAction;
+			sh:minCount 1;
+   		    sh:maxCount 1;
+			sh:hasValue  ex:request;
+		]
+	];
+	sh:condition [
+        sh:property [
+			sh:path ucp:hasResource;
+			sh:minCount 1;
+            sh:maxCount 1;
+			sh:class  ucpr:Signature;        # of type Signature
+		]
+	];
+
+	sh:condition [
+     	sh:property [
+			sh:path ucp:hasEntity;
+			sh:class  foaf:Person;           # of type Person
+		]
+	];
+
+	sh:condition :ResourceShapeCondition;
+	sh:condition :EntityShapeCondition;
+
+	].
+
+
+:ResourceShapeCondition  a   sh:NodeShape;
+sh:targetClass ucpr:Signature;
+	sh:property 
+	[
+	sh:path  ucpr:hasSignatory;
+	sh:minCount 1;
+    sh:maxCount 1;
+	sh:class  ucpr:HotelMangement;
+	].
+
+
+:EntityShapeCondition  a   sh:NodeShape;
+sh:targetNode foaf:Person;
+sh:node :HotelShapeCondition ;
+	sh:property 
+	[
+	sh:path  ucpr:stayIn;
+	sh:minCount 1;
+    sh:maxCount 1;
+	sh:class  ucpr:Hotel;   
+	];
+
+	sh:property 
+	[
+	sh:path  ucpr:hasStayDuration;
+	sh:minCount 1;
+    sh:maxCount 1;
+	sh:hasValue  ex:permanent;
+	].
+
+:HotelShapeCondition  a  sh:NodeShape;
+sh:targetClass   ucpr:Hotel;
+	sh:property
+	[
+	sh:path  ucpr:hasManagementUnit;
+	sh:minCount 1;
+	sh:maxCount 1;
+	sh:class  ucpr:HotelManagement;
+	].
