@@ -5,6 +5,7 @@ Here, we present a comprehensive framework called GUCON (Generic Graph Pattern b
 ### Goal 
 This repository aims to demonstrate the evaluation of the framework specification through the instantitation of our framework using various policy and representation languages, mainly,the Open Digital Right Language (ODRL), OWL, and SHACL. 
 For the instantiation of OWL and SHACL, we present the ontology and the Usgae Control Policy (ucp) profile, which respectively express the specification elements of our framework and our guided use case (see below). As far as ODRL is concerned, we use the ODRL model to create an ODRL profile that expresses our use case.
+The instantiations provided so far represent mainly the requirement R1 from our use case (see below).
 
 ### Use case
 
@@ -30,5 +31,3 @@ down into four types of requirements (R): allowed (R1. and R2.), not allowed
 - R4. If a person permanently changes their place of residence or permanently moves from a foreign country to Austria, they must register their current address with one of the local authorities within three (3) days of such change.
 - R5. If a person permanently changes their place of residence or permanently leaves the country, they must deregister their old address within three (3) days of such change.
 - R6. If a person is temporarily visiting Austria for tourism purposes, they are exempt from the obligation to register their address.
-
-
