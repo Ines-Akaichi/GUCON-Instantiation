@@ -3,7 +3,7 @@
 Here, we present a comprehensive framework called GUCON (Generic Graph Pattern based Policy Framework for Usage Control) that focuses on specifying and enforcing usage control policies in various domains. The GUCON framework leverages the power of graph patterns to provide flexible and adaptable policy specification and enforcement mechanisms. By representing policies as graph patterns, we enable the expression of complex relationships and dependencies between different elements of the system. This approach will allow a fine-grained control over the usage of resources, ensuring compliance with specific requirements and restrictions.
 
 ### Goal 
-This repository aims to demonstrate the evaluation of the framework specification through the instantitation of our framework using various policy and representation languages, mainly,the Open Digital Right Language (ODRL), OWL, and SHACL. 
+This repository aims to demonstrate the evaluation of the framework specification through the instantitation of our framework using various policy and representation languages, mainly, ODRL, OWL, and SHACL. 
 For the instantiation of OWL and SHACL, we present the ontology and the Usgae Control Policy (ucp) profile, which respectively express the specification elements of our framework and our guided use case (see below). As far as ODRL is concerned, we use the ODRL model to create an ODRL profile that expresses our use case.
 The instantiations provided so far represent mainly the requirement R1 from our use case (see below).
 
