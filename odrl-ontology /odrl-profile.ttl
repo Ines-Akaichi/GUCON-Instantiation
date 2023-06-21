@@ -970,7 +970,9 @@ foaf:Person
 
 <http://example.org/odrl:profile:01/#Hotel> 
     a rdfs:Class , owl:Class, skos:Concept ;
-    rdfs:label "Hotel"@en .
+    rdfs:isDefinedBy <http://example.org/odrl:profile:01/> ;
+    rdfs:label "Hotel"@en ;
+    skos:definition "."@en .
 
 <http://example.org/odrl:profile:01/#stayDuration>
     a rdf:Property , owl:ObjectProperty, skos:Concept ;
