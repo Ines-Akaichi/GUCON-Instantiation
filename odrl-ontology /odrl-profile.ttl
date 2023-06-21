@@ -959,7 +959,7 @@ foaf:Person
     rdfs:label "stayIn "@en ;
     skos:definition "."@en ;
     rdfs:domain foaf:Person ;
-    rdfs:range :Location .
+    rdfs:range <http://example.org/odrl:profile:01/#Location>  .
 
 <http://example.org/odrl:profile:01/#Location>
     a rdfs:Class , owl:Class, skos:Concept ;
